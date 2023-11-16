@@ -5,7 +5,7 @@
 using namespace std;
 
 const string traceFolder = "Test/";
-const string defaultStudentBasic = "./code";
+const string defaultStudentBasic = "./testcode";
 const string defaultStanderBasic = "./Basic-Demo-64bit";
 
 const int traceCount = 100;
@@ -179,14 +179,17 @@ int main(int argc, char **argv) {
     parseArguments(argc, argv);
     try {
         cout << "Compiling code ..." << endl;
-        system("g++ -o code Basic/Basic.cpp Basic/evalstate.cpp Basic/exp.cpp Basic/parser.cpp Basic/program.cpp Basic/statement.cpp Basic/Utils/error.cpp Basic/Utils/error.hpp Basic/Utils/tokenScanner.cpp Basic/Utils/tokenScanner.hpp Basic/Utils/strlib.cpp");
+        /**************************************************************
+         if you modify the structure of the files, you should modify the file paths here.
+         **************************************************************/
+        system("g++ -o testcode Basic/Basic.cpp Basic/evalstate.cpp Basic/exp.cpp Basic/parser.cpp Basic/program.cpp Basic/statement.cpp Basic/Utils/error.cpp Basic/Utils/error.hpp Basic/Utils/tokenScanner.cpp Basic/Utils/tokenScanner.hpp Basic/Utils/strlib.cpp");
         if (traceFile.size()) runTest(traceFile);
         else {
             int i = 0;
             for (; i < traceCount; i++) runTest(traceFolder + traces[i]);
         }
     } catch (...) {}
-    system("rm code -f");
+    system("rm testcode -f");
     showScore();
     return 0;
 }

@@ -50,14 +50,13 @@ BASIC 是一门**解释性**编程语言，本次大作业要求你用 C++ 实�
 │   ├── program.hpp
 │   ├── statement.cpp
 │   └── statement.hpp
+├── StanfordCPPLib
+├── Test
 ├── Basic-Demo-64bit
 ├── CMakeLists.txt
-├── LICENSE
 ├── .gitignore
 ├── Minimal BASIC Interpreter - 2023.pdf
 ├── README.md
-├── StanfordCPPLib
-├── Test
 └── score.cpp
 ```
 
@@ -80,7 +79,7 @@ BASIC 是一门**解释性**编程语言，本次大作业要求你用 C++ 实�
 
 **注意：**
 
-一般来讲，你只需补充Basic.cpp/program.cpp/statement.cpp中的代码即可完成作业要求。你也可以根据自己的需要修改其他文件。
+一般来讲，你只需补充 `Basic/Basic.cpp` `Basic/program.hpp` `Basic/program.cpp` `Basic/statement.hpp` `Basic/statement.cpp` 中的代码即可完成作业要求。当然，你也可以根据自己的需要修改其他文件。同时，你也应该仔细学习使用其他文件。
 
 
 ### 2.2 你需要学习使用的部分
@@ -208,6 +207,8 @@ END Hahaha  --> an invalid END command
 3.  `Basic/exp.hpp` 存储程序运行过程的变量与值。】
 
 ## 2.5 关于 OJ 评测
+
+你的可执行文件的名字应为 `code`（如果你修改了Cmake，请务必保证可执行文件名仍为`code`）。
 
 测评文件内容默认是 Test 文件夹下提供的文件。这些文件和 oj 中测评的数据点是相同的。在这些测试点下，你的程序需要输出与标程相同的结果。
 
