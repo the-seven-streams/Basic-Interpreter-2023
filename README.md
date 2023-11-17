@@ -208,13 +208,14 @@ END Hahaha  --> an invalid END command
 
 ## 2.5 关于 OJ 评测
 
-你的可执行文件的名字应为 `code`（如果你修改了Cmake，请务必保证可执行文件名仍为`code`）。
+你需要使用git进行版本管理和代码提交。比如，你的git仓库地址是 `Your_profile/Your_repo`，你只需要在OJ的相应页面中输入`https://github.com/Your_profile/Your_repo` 即可进行提交。
+
+**注意，你的可执行文件的名字应为 `code`（如果你修改了Cmake，请务必保证可执行文件名仍为`code`）。**
 
 测评文件内容默认是 Test 文件夹下提供的文件。这些文件和 oj 中测评的数据点是相同的。在这些测试点下，你的程序需要输出与标程相同的结果。
 
 ## 2.6 关于 code review
 
-- 请务必保证 code review 时你的最新版本代码不仅仅保存在 ACM OJ 上，否则将酌情扣分。
 - 请务必保证你完全清楚你在写什么，且**严禁抄袭**。
 
 
