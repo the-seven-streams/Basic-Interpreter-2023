@@ -31,9 +31,12 @@ class Statement;
  */
 
 class Program {
+private:
+    std::map<int, Statement*> parsedlines;
 
 public:
-
+    int now_line = 0;
+    std::map<int, std::string> lines;
 /*
  * Constructor: Program
  * Usage: Program program;
@@ -141,8 +144,8 @@ public:
     int getNextLineNumber(int lineNumber);
 
     //more func to add
-    //todo
-
+    void run(EvalState &state);
+    void list();
 private:
 
     // Fill this in with whatever types and instance variables you need

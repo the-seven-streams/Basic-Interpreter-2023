@@ -12,15 +12,15 @@
 #ifndef _statement_h
 #define _statement_h
 
-#include <string>
-#include <sstream>
-#include "evalstate.hpp"
-#include "exp.hpp"
-#include "Utils/tokenScanner.hpp"
-#include "program.hpp"
-#include"parser.hpp"
 #include "Utils/error.hpp"
 #include "Utils/strlib.hpp"
+#include "Utils/tokenScanner.hpp"
+#include "evalstate.hpp"
+#include "exp.hpp"
+#include "parser.hpp"
+#include "program.hpp"
+#include <sstream>
+#include <string>
 
 class Program;
 
@@ -35,44 +35,40 @@ class Program;
  */
 
 class Statement {
-
 public:
+  /*
+   * Constructor: Statement
+   * ----------------------
+   * The base class constructor is empty.  Each subclass must provide
+   * its own constructor.
+   */
 
-/*
- * Constructor: Statement
- * ----------------------
- * The base class constructor is empty.  Each subclass must provide
- * its own constructor.
- */
+  Statement();
 
-    Statement();
+  /*
+   * Destructor: ~Statement
+   * Usage: delete stmt;
+   * -------------------
+   * The destructor deallocates the storage for this expression.
+   * It must be declared virtual to ensure that the correct subclass
+   * destructor is called when deleting a statement.
+   */
 
-/*
- * Destructor: ~Statement
- * Usage: delete stmt;
- * -------------------
- * The destructor deallocates the storage for this expression.
- * It must be declared virtual to ensure that the correct subclass
- * destructor is called when deleting a statement.
- */
+  virtual ~Statement();
 
-    virtual ~Statement();
+  /*
+   * Method: execute
+   * Usage: stmt->execute(state);
+   * ----------------------------
+   * This method executes a BASIC statement.  Each of the subclasses
+   * defines its own execute method that implements the necessary
+   * operations.  As was true for the expression evaluator, this
+   * method takes an EvalState object for looking up variables or
+   * controlling the operation of the interpreter.
+   */
 
-/*
- * Method: execute
- * Usage: stmt->execute(state);
- * ----------------------------
- * This method executes a BASIC statement.  Each of the subclasses
- * defines its own execute method that implements the necessary
- * operations.  As was true for the expression evaluator, this
- * method takes an EvalState object for looking up variables or
- * controlling the operation of the interpreter.
- */
-
-    virtual void execute(EvalState &state, Program &program) = 0;
-
+  virtual void execute(EvalState &state, Program &program) = 0;
 };
-
 
 /*
  * The remainder of this file must consists of subclass
@@ -84,5 +80,58 @@ public:
  * an Expression object), the class implementation must also
  * specify its own destructor method to free that memory.
  */
+class StatementRem : public Statement {
+public:
+  void execute(EvalState &, Program &);
+};
+class StatementLet : public Statement {
+private:
+  std::string lvalue;
+  Expression *rvalue;
 
+public:
+  ~StatementLet();
+  StatementLet(std::string);
+  void execute(EvalState &, Program &);
+};
+class StatementPrint : public Statement {
+private:
+  Expression *exp;
+public:
+  StatementPrint(std::string);
+  ~StatementPrint();
+  void execute(EvalState &, Program &);
+};
+class StatementInput : public Statement {
+public:
+  StatementInput(std::string);
+  void execute(EvalState &, Program &);
+
+private:
+  std::string lvalue;
+};
+class StatementEnd : public Statement {
+public:
+  void execute(EvalState &, Program &);
+};
+class StatementGoto : public Statement {
+private:
+  int line_number;
+
+public:
+  StatementGoto(std::string);
+  void execute(EvalState &, Program &);
+};
+
+class StatementIf : public Statement {
+private:
+  Expression *condition1, *condition2;
+  std::string op;
+  int line_number;
+
+public:
+  ~StatementIf();
+  StatementIf(std::string);
+  void execute(EvalState &, Program &);
+};
 #endif
